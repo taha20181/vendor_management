@@ -31,8 +31,7 @@ class PurchaseOrderView(APIView):
         serializer = PurchaseOrderSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'data' : serializer.data, 'status' : status.HTTP_201_CREATED
-            }, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, po_id):
