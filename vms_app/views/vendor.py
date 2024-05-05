@@ -35,7 +35,7 @@ class VendorView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, vendor_id):
+    def delete(self, request, vendor_id):
         vendor = Vendor.objects.get(id=vendor_id)
         vendor.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
