@@ -134,7 +134,7 @@ python manage.py runserver # default port 8000
 
 ### Update a Purchase Order Details
 - **URL:** `/purchase_orders/`
-- **Method:** POST
+- **Method:** PUT
 - **Description:** Creates a purchase order.
 - **Parameters:** None
 - **Returns:**
