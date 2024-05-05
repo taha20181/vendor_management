@@ -26,7 +26,21 @@ python3 manage.py createsuperuser
 # Start the application
 python manage.py runserver # default port 8000
 
-# Access the web app in browser: http://127.0.0.1:8000/ 
+# Access the web app in browser: http://127.0.0.1:8000/
+
+# Create auth token for API authentication
+
+python manage.py shell
+
+from django.contrib.auth.models import
+from rest_framework.authtoken.models import Token
+
+user = User.objects.get(username='username')
+token = Token.objects.create(user=user)
+
+# Use this token in the request header 
+Authorization : Token {token}
+
 ```
 
 ## API Endpoints
@@ -133,8 +147,8 @@ python manage.py runserver # default port 8000
     ```
 
 ### Update a Purchase Order Details
-- **URL:** `/purchase_orders/`
-- **Method:** POST
+- **URL:** `/purchase_orders/<po_id>/`
+- **Method:** PUT
 - **Description:** Creates a purchase order.
 - **Parameters:** None
 - **Returns:**
