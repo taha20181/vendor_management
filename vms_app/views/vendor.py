@@ -16,7 +16,7 @@ class VendorView(APIView):
             offset = int(query_params.get('offset', 0))
 
             vendors = Vendor.objects.all()
-            vendors = vendors[offset:limit]
+            vendors = vendors[offset:offset+limit]
             serializer = VendorSerializer(vendors, many=True)
         return Response(serializer.data)
 

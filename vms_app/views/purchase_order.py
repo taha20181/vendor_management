@@ -20,14 +20,16 @@ class PurchaseOrderView(APIView):
             offset = int(query_params.get('offset', 0))
 
             purchase_orders = PurchaseOrder.objects.all()
-            purchase_orders = purchase_orders[offset:limit]
-            purchase_orders = PurchaseOrder.objects.all()
+            purchase_orders = purchase_orders[offset:offset+limit]
             serializer = PurchaseOrderSerializer(purchase_orders, many=True)
 
         return Response(serializer.data)
 
     def post(self, request):
         data = request.data
+        data.update({
+            "expected_delivery_date" : datetime.now() + timedelta(days=3)
+        })
         serializer = PurchaseOrderSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
